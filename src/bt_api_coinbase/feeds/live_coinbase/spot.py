@@ -8,6 +8,9 @@ from __future__ import annotations
 import uuid
 from typing import Any
 
+from bt_api_base.functions.utils import update_extra_data
+from bt_api_base.logging_factory import get_logger
+
 from bt_api_coinbase.containers.accounts.coinbase_account import CoinbaseRequestAccountData
 from bt_api_coinbase.containers.bars.coinbase_bar import CoinbaseRequestBarData
 from bt_api_coinbase.containers.exchanges.coinbase_exchange_data import CoinbaseExchangeDataSpot
@@ -15,8 +18,6 @@ from bt_api_coinbase.containers.orderbooks.coinbase_orderbook import CoinbaseReq
 from bt_api_coinbase.containers.orders.coinbase_order import CoinbaseRequestOrderData
 from bt_api_coinbase.containers.tickers.coinbase_ticker import CoinbaseRequestTickerData
 from bt_api_coinbase.feeds.live_coinbase.request_base import CoinbaseRequestData
-from bt_api_base.functions.utils import update_extra_data
-from bt_api_base.logging_factory import get_logger
 
 
 class CoinbaseRequestDataSpot(CoinbaseRequestData):

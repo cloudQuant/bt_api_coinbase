@@ -7,13 +7,14 @@ Coinbase 交易所注册模块
 from __future__ import annotations
 
 from bt_api_base.balance_utils import simple_balance_handler as _coinbase_balance_handler
+from bt_api_base.registry import ExchangeRegistry
+
 from bt_api_coinbase.containers.exchanges.coinbase_exchange_data import (
     CoinbaseExchangeDataSpot,
 )
 from bt_api_coinbase.feeds.live_coinbase.spot import (
     CoinbaseRequestDataSpot,
 )
-from bt_api_base.registry import ExchangeRegistry
 
 
 def register_coinbase() -> None:
