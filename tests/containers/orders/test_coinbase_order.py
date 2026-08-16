@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -10,7 +11,9 @@ from bt_api_coinbase.containers.orders.coinbase_order import (
 
 
 class TestCoinbaseOrderData:
+    """Class TestCoinbaseOrderData"""
     def test_init(self):
+        """test_init method"""
         order = CoinbaseOrderData({}, symbol_name="BTC-USD", asset_type="SPOT")
 
         assert order.exchange_name == "COINBASE"
@@ -19,6 +22,7 @@ class TestCoinbaseOrderData:
         assert order.has_been_init_data is False
 
     def test_init_data(self):
+        """test_init_data method"""
         data = {
             "order_id": "123456",
             "client_order_id": "abc123",
@@ -39,6 +43,7 @@ class TestCoinbaseOrderData:
         assert order.price == 50000.0
 
     def test_init_data_parses_fields_and_getters(self):
+        """test_init_data_parses_fields_and_getters method"""
         data = {
             "order_id": "123456",
             "client_order_id": "abc123",
@@ -81,6 +86,7 @@ class TestCoinbaseOrderData:
         assert order.get_order_type() == "limit"
 
     def test_get_all_data(self):
+        """test_get_all_data method"""
         order = CoinbaseOrderData(
             {}, symbol_name="BTC-USD", asset_type="SPOT", has_been_json_encoded=True
         )
@@ -90,6 +96,7 @@ class TestCoinbaseOrderData:
         assert result["symbol_name"] == "BTC-USD"
 
     def test_str_representation(self):
+        """test_str_representation method"""
         order = CoinbaseOrderData(
             {}, symbol_name="BTC-USD", asset_type="SPOT", has_been_json_encoded=True
         )
@@ -98,6 +105,7 @@ class TestCoinbaseOrderData:
         assert "COINBASE" in result
 
     def test_request_and_wss_subclasses_parse_payloads(self):
+        """test_request_and_wss_subclasses_parse_payloads method"""
         request = CoinbaseRequestOrderData(
             json.dumps(
                 {

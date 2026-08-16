@@ -23,9 +23,10 @@ _logger = get_logger("coinbase_trade")
 
 
 class CoinbaseTradeData(TradeData):
-    """保存Coinbase成交信息（模板基类，REST API数据格式）"""
+    """Coinbase（，REST API）"""
 
     def __init__(self, trade_info, symbol_name, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(trade_info, has_been_json_encoded)
         self.exchange_name = "COINBASE"
         self.local_update_time = time.time()
@@ -50,6 +51,7 @@ class CoinbaseTradeData(TradeData):
         self.has_been_init_data = False
 
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.trade_data = json.loads(self.trade_info)
             self.has_been_json_encoded = True
@@ -82,6 +84,7 @@ class CoinbaseTradeData(TradeData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.init_data()
             self.all_data = {
@@ -110,62 +113,77 @@ class CoinbaseTradeData(TradeData):
         return self.__str__()
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_trade_id(self):
+        """get_trade_id method"""
         self.init_data()
         return self.trade_id
 
     def get_order_id(self):
+        """get_order_id method"""
         self.init_data()
         return self.order_id
 
     def get_product_id(self):
+        """get_product_id method"""
         self.init_data()
         return self.product_id
 
     def get_trade_type(self):
+        """get_trade_type method"""
         self.init_data()
         return self.trade_type
 
     def get_side(self):
+        """get_side method"""
         self.init_data()
         return self.side
 
     def get_price(self):
+        """get_price method"""
         self.init_data()
         return self.price
 
     def get_size(self):
+        """get_size method"""
         self.init_data()
         return self.size
 
     def get_commission(self):
+        """get_commission method"""
         self.init_data()
         return self.commission
 
     def get_trade_time(self):
+        """get_trade_time method"""
         self.init_data()
         return self.trade_time
 
     def get_liquidity_indicator(self):
+        """get_liquidity_indicator method"""
         self.init_data()
         return self.liquidity_indicator
 
 
 class CoinbaseWssTradeData(CoinbaseTradeData):
-    """保存WebSocket成交信息（字段映射差异：trade_id而非entry_id，time而非trade_time）"""
+    """WebSocket（：trade_identry_id，timetrade_time）"""
 
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.trade_data = json.loads(self.trade_info)
             self.has_been_json_encoded = True
@@ -198,9 +216,10 @@ class CoinbaseWssTradeData(CoinbaseTradeData):
 
 
 class CoinbaseRequestTradeData(CoinbaseTradeData):
-    """保存REST API成交信息（REST API历史成交，字段映射与基类相同）"""
+    """REST API（REST API，）"""
 
     def init_data(self):
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.trade_data = json.loads(self.trade_info)
             self.has_been_json_encoded = True

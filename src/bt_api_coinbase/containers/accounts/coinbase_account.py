@@ -16,7 +16,7 @@ logger = get_logger("container")
 
 
 class CoinbaseAccountData(AccountData):
-    """保存Coinbase账户信息"""
+    """Coinbase"""
 
     def __init__(
         self,
@@ -25,13 +25,12 @@ class CoinbaseAccountData(AccountData):
         asset_type: str,
         has_been_json_encoded: bool = False,
     ) -> None:
-        """初始化Coinbase账户数据。
+        """Coinbase。
 
-        Args:
-            account_info: 账户信息字典。
-            symbol_name: 交易对名称。
-            asset_type: 资产类型（如 SPOT、FUTURE 等）。
-            has_been_json_encoded: 是否已经 JSON 编码，默认为 False。
+        Args: account_info: 。
+            symbol_name: 。
+            asset_type: （ SPOT、FUTURE ）。
+            has_been_json_encoded:  JSON ， False。
         """
         super().__init__(account_info, has_been_json_encoded)
         self.exchange_name = "COINBASE"
@@ -50,10 +49,9 @@ class CoinbaseAccountData(AccountData):
         self.has_been_init_data = False
 
     def init_data(self) -> CoinbaseAccountData:
-        """初始化并解析账户数据。
+        """。
 
-        Returns:
-            初始化后的 CoinbaseAccountData 实例。
+        Returns: CoinbaseAccountData 。
         """
         if not self.has_been_json_encoded:
             self.account_data = json.loads(self.account_info)
@@ -87,10 +85,9 @@ class CoinbaseAccountData(AccountData):
         return self
 
     def get_all_data(self) -> dict[str, Any]:
-        """获取所有账户数据。
+        """。
 
-        Returns:
-            包含所有账户信息的字典。
+        Returns: 。
         """
         if self.all_data is None:
             self.init_data()
@@ -110,126 +107,112 @@ class CoinbaseAccountData(AccountData):
         return self.all_data
 
     def __str__(self) -> str:
-        """返回账户数据的字符串表示。
+        """。
 
-        Returns:
-            JSON 格式的账户数据字符串。
+        Returns: JSON 。
         """
         self.init_data()
         return json.dumps(self.get_all_data())
 
     def __repr__(self) -> str:
-        """返回账户数据的字符串表示。
+        """。
 
-        Returns:
-            账户数据的字符串表示。
+        Returns: 。
         """
         return self.__str__()
 
     def get_exchange_name(self) -> str:
-        """获取交易所名称。
+        """。
 
-        Returns:
-            交易所名称 "COINBASE"。
+        Returns: "COINBASE"。
         """
         return self.exchange_name
 
     def get_local_update_time(self) -> float:
-        """获取本地更新时间戳。
+        """。
 
-        Returns:
-            本地更新时间戳。
+        Returns: 。
         """
         return self.local_update_time
 
     def get_symbol_name(self) -> str:
-        """获取交易对名称。
+        """。
 
-        Returns:
-            交易对名称。
+        Returns: 。
         """
         return self.symbol_name
 
     def get_asset_type(self) -> str:
-        """获取资产类型。
+        """。
 
-        Returns:
-            资产类型（如 SPOT、FUTURE 等）。
+        Returns: （ SPOT、FUTURE ）。
         """
         return self.asset_type
 
     def get_account_id(self) -> str | None:
-        """获取账户ID。
+        """ID。
 
-        Returns:
-            账户ID。
+        Returns: ID。
         """
         self.init_data()
         return self.account_id
 
     def get_currency(self) -> str | None:
-        """获取货币类型。
+        """。
 
-        Returns:
-            货币类型。
+        Returns: 。
         """
         self.init_data()
         return self.currency
 
     def get_balance(self) -> float | None:
-        """获取账户余额。
+        """。
 
-        Returns:
-            账户余额。
+        Returns: 。
         """
         self.init_data()
         return self.balance
 
     def get_available(self) -> float | None:
-        """获取可用余额。
+        """。
 
-        Returns:
-            可用余额。
+        Returns: 。
         """
         self.init_data()
         return self.available
 
     def get_hold(self) -> float | None:
-        """获取冻结余额。
+        """。
 
-        Returns:
-            冻结余额。
+        Returns: 。
         """
         self.init_data()
         return self.hold
 
     def get_last_activity(self) -> str | None:
-        """获取最后活动时间。
+        """。
 
-        Returns:
-            最后活动时间。
+        Returns: 。
         """
         self.init_data()
         return self.last_activity
 
     def get_native_balance(self) -> dict[str, Any] | None:
-        """获取原生余额信息。
+        """。
 
-        Returns:
-            原生余额信息字典。
+        Returns: 。
         """
         self.init_data()
         return self.native_balance
 
 
 class CoinbaseSpotWssAccountData(CoinbaseAccountData):
-    """保存WebSocket账户信息"""
+    """WebSocket"""
 
     def init_data(self) -> CoinbaseSpotWssAccountData:
-        """初始化并解析WebSocket账户数据。
+        """WebSocket。
 
-        Returns:
-            初始化后的 CoinbaseSpotWssAccountData 实例。
+        Returns: CoinbaseSpotWssAccountData 。
         """
         if not self.has_been_json_encoded:
             self.account_data = json.loads(self.account_info)
@@ -266,13 +249,12 @@ class CoinbaseSpotWssAccountData(CoinbaseAccountData):
 
 
 class CoinbaseRequestAccountData(CoinbaseAccountData):
-    """保存REST API账户信息"""
+    """REST API"""
 
     def init_data(self) -> CoinbaseRequestAccountData:
-        """初始化并解析REST API账户数据。
+        """REST API。
 
-        Returns:
-            初始化后的 CoinbaseRequestAccountData 实例。
+        Returns: CoinbaseRequestAccountData 。
         """
         if not self.has_been_json_encoded:
             self.account_data = json.loads(self.account_info)

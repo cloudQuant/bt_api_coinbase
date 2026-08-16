@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from bt_api_coinbase.containers.accounts import (
@@ -8,7 +9,9 @@ from bt_api_coinbase.containers.accounts import (
 
 
 class TestCoinbaseAccountData:
+    """Class TestCoinbaseAccountData"""
     def test_init(self):
+        """test_init method"""
         account = CoinbaseAccountData({}, symbol_name="BTC-USD", asset_type="SPOT")
 
         assert account.exchange_name == "COINBASE"
@@ -17,6 +20,7 @@ class TestCoinbaseAccountData:
         assert account.has_been_init_data is False
 
     def test_init_data(self):
+        """test_init_data method"""
         data = {
             "uuid": "test-account",
             "currency": "BTC",
@@ -38,6 +42,7 @@ class TestCoinbaseAccountData:
         assert account.get_last_activity() == "2024-01-01T00:00:00Z"
 
     def test_get_all_data(self):
+        """test_get_all_data method"""
         account = CoinbaseAccountData(
             {
                 "uuid": "test-account",
@@ -56,6 +61,7 @@ class TestCoinbaseAccountData:
         assert result["balance"] == 1.5
 
     def test_request_account_parses_account_wrapper(self):
+        """test_request_account_parses_account_wrapper method"""
         account = CoinbaseRequestAccountData(
             {
                 "account": {
@@ -78,6 +84,7 @@ class TestCoinbaseAccountData:
         assert account.get_balance() == 2.25
 
     def test_request_account_selects_matching_currency_from_accounts(self):
+        """test_request_account_selects_matching_currency_from_accounts method"""
         account = CoinbaseRequestAccountData(
             {
                 "accounts": [
@@ -106,6 +113,7 @@ class TestCoinbaseAccountData:
         assert account.get_balance() == 1.5
 
     def test_wss_account_selects_matching_currency_from_accounts(self):
+        """test_wss_account_selects_matching_currency_from_accounts method"""
         account = CoinbaseSpotWssAccountData(
             {
                 "accounts": [

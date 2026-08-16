@@ -14,9 +14,9 @@ logger = get_logger("container")
 
 
 class CoinbaseOrderBookData(OrderBookData):
-    """Coinbase订单簿数据容器基类.
+    """Coinbase.
 
-    保存和管理Coinbase交易所的订单簿信息。
+    Coinbase。
     """
 
     def __init__(
@@ -26,13 +26,12 @@ class CoinbaseOrderBookData(OrderBookData):
         asset_type: str,
         has_been_json_encoded: bool = False,
     ) -> None:
-        """初始化Coinbase订单簿数据.
+        """Coinbase.
 
-        Args:
-            order_book_info: 订单簿原始数据（JSON字符串或字典）
-            symbol_name: 交易对名称
-            asset_type: 资产类型（如 "SPOT"）
-            has_been_json_encoded: 数据是否已经过JSON编码
+        Args: order_book_info: （JSON）
+            symbol_name: 
+            asset_type: （ "SPOT"）
+            has_been_json_encoded: JSON
         """
         super().__init__(order_book_info, has_been_json_encoded)
         self.exchange_name = "COINBASE"
@@ -52,21 +51,18 @@ class CoinbaseOrderBookData(OrderBookData):
         self.has_been_init_data = False
 
     def init_data(self) -> CoinbaseOrderBookData:
-        """初始化并解析订单簿数据（子类需实现）.
+        """（）.
 
-        Returns:
-            CoinbaseOrderBookData: 返回self以支持链式调用
+        Returns: CoinbaseOrderBookData: self
 
-        Raises:
-            NotImplementedError: 子类必须实现此方法
+        Raises: NotImplementedError:
         """
         raise NotImplementedError("Subclasses must implement init_data")
 
     def get_all_data(self) -> dict[str, Any]:
-        """获取所有订单簿数据.
+        """.
 
-        Returns:
-            dict: 包含交易所名称、交易对、买卖单列表等完整信息
+        Returns: dict: 、、
         """
         if self.all_data is None:
             self.all_data = {
@@ -86,107 +82,96 @@ class CoinbaseOrderBookData(OrderBookData):
         return self.all_data
 
     def __str__(self) -> str:
-        """返回订单簿的JSON字符串表示."""
+        """JSON."""
         self.init_data()
         return json.dumps(self.get_all_data())
 
     def __repr__(self) -> str:
-        """返回订单簿的字符串表示."""
+        """."""
         return self.__str__()
 
     def get_exchange_name(self) -> str:
-        """获取交易所名称.
+        """.
 
-        Returns:
-            str: 交易所名称（"COINBASE"）
+        Returns: str: （"COINBASE"）
         """
         return self.exchange_name
 
     def get_local_update_time(self) -> float:
-        """获取本地更新时间戳.
+        """.
 
-        Returns:
-            float: 本地时间戳（Unix时间戳）
+        Returns: float: （Unix）
         """
         return self.local_update_time
 
     def get_symbol_name(self) -> str:
-        """获取交易对名称.
+        """.
 
-        Returns:
-            str: 交易对名称
+        Returns: str:
         """
         return self.symbol_name
 
     def get_asset_type(self) -> str:
-        """获取资产类型.
+        """.
 
-        Returns:
-            str: 资产类型（如 "SPOT"）
+        Returns: str: （ "SPOT"）
         """
         return self.asset_type
 
     def get_server_time(self) -> str | None:
-        """获取服务器时间.
+        """.
 
-        Returns:
-            str | None: 服务器时间字符串
+        Returns: str | None:
         """
         return self.server_time
 
     def get_bid_price_list(self) -> list[float] | None:
-        """获取买单价格列表.
+        """.
 
-        Returns:
-            list | None: 买单价格列表
+        Returns: list | None:
         """
         return self.bid_price_list
 
     def get_ask_price_list(self) -> list[float] | None:
-        """获取卖单价格列表.
+        """.
 
-        Returns:
-            list | None: 卖单价格列表
+        Returns: list | None:
         """
         return self.ask_price_list
 
     def get_bid_volume_list(self) -> list[float] | None:
-        """获取买单数量列表.
+        """.
 
-        Returns:
-            list | None: 买单数量列表
+        Returns: list | None:
         """
         return self.bid_volume_list
 
     def get_ask_volume_list(self) -> list[float] | None:
-        """获取卖单数量列表.
+        """.
 
-        Returns:
-            list | None: 卖单数量列表
+        Returns: list | None:
         """
         return self.ask_volume_list
 
     def get_bid_trade_nums(self) -> list[int] | None:
-        """获取买单订单数量列表.
+        """.
 
-        Returns:
-            list | None: 买单订单数量列表
+        Returns: list | None:
         """
         return self.bid_trade_nums
 
     def get_ask_trade_nums(self) -> list[int] | None:
-        """获取卖单订单数量列表.
+        """.
 
-        Returns:
-            list | None: 卖单订单数量列表
+        Returns: list | None:
         """
         return self.ask_trade_nums
 
 
 class CoinbaseRequestOrderBookData(CoinbaseOrderBookData):
-    """Coinbase REST API订单簿数据容器.
+    """Coinbase REST API.
 
-    API响应格式示例:
+    API:
     {
         "pricebook": {
             "product_id": "BTC-USD",
@@ -198,10 +183,9 @@ class CoinbaseRequestOrderBookData(CoinbaseOrderBookData):
     """
 
     def init_data(self) -> CoinbaseRequestOrderBookData:
-        """初始化并解析REST API订单簿数据.
+        """REST API.
 
-        Returns:
-            CoinbaseRequestOrderBookData: 返回self以支持链式调用
+        Returns: CoinbaseRequestOrderBookData: self
         """
         if not self.has_been_json_encoded:
             self.order_book_data = json.loads(self.order_book_info)

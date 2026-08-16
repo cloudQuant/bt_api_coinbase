@@ -20,8 +20,7 @@ class CoinbaseBalanceData(BalanceData):
     It parses and stores balance information including currency, available,
     hold, and total amounts.
 
-    Attributes:
-        exchange_name: Exchange identifier ("COINBASE").
+    Attributes: exchange_name: Exchange identifier ("COINBASE").
         local_update_time: Local timestamp of last update.
         asset_type: Asset type for the balance.
         balance_data: Parsed balance data dictionary.
@@ -42,8 +41,7 @@ class CoinbaseBalanceData(BalanceData):
     ) -> None:
         """Initialize Coinbase balance data container.
 
-        Args:
-            balance_info: Balance information from Coinbase API (dict or JSON string).
+        Args: balance_info: Balance information from Coinbase API (dict or JSON string).
             asset_type: Asset type for the balance.
             has_been_json_encoded: Whether balance_info is already JSON encoded.
         """
@@ -71,8 +69,7 @@ class CoinbaseBalanceData(BalanceData):
         Parses the balance data structure and extracts currency,
         available, hold, and total amounts.
 
-        Returns:
-            Self for method chaining.
+        Returns: Self for method chaining.
         """
         if not self.has_been_json_encoded:
             self.balance_data = (
@@ -127,8 +124,7 @@ class CoinbaseBalanceData(BalanceData):
     def get_all_data(self) -> dict[str, Any]:
         """Get all balance data as a dictionary.
 
-        Returns:
-            Dictionary containing all balance information including exchange name,
+        Returns: Dictionary containing all balance information including exchange name,
             asset type, local update time, currency, and balance amounts.
         """
         if self.all_data is None:
@@ -148,8 +144,7 @@ class CoinbaseBalanceData(BalanceData):
     def __str__(self) -> str:
         """Return string representation of balance data.
 
-        Returns:
-            JSON string of all balance data.
+        Returns: JSON string of all balance data.
         """
         self.init_data()
         return json.dumps(self.get_all_data())
@@ -157,40 +152,35 @@ class CoinbaseBalanceData(BalanceData):
     def __repr__(self) -> str:
         """Return representation of balance data.
 
-        Returns:
-            Same as __str__.
+        Returns: Same as __str__.
         """
         return self.__str__()
 
     def get_exchange_name(self) -> str:
         """Get exchange name.
 
-        Returns:
-            Exchange identifier "COINBASE".
+        Returns: Exchange identifier "COINBASE".
         """
         return self.exchange_name
 
     def get_local_update_time(self) -> float:
         """Get local update timestamp.
 
-        Returns:
-            Local timestamp when data was last updated.
+        Returns: Local timestamp when data was last updated.
         """
         return self.local_update_time
 
     def get_asset_type(self) -> str:
         """Get asset type.
 
-        Returns:
-            Asset type for the balance.
+        Returns: Asset type for the balance.
         """
         return self.asset_type
 
     def get_currency(self) -> str | None:
         """Get currency symbol.
 
-        Returns:
-            Currency symbol or None if not initialized.
+        Returns: Currency symbol or None if not initialized.
         """
         if not self.has_been_init_data:
             self.init_data()
@@ -199,8 +189,7 @@ class CoinbaseBalanceData(BalanceData):
     def get_available(self) -> float | None:
         """Get available balance.
 
-        Returns:
-            Available balance amount or None if not initialized.
+        Returns: Available balance amount or None if not initialized.
         """
         if not self.has_been_init_data:
             self.init_data()
@@ -209,8 +198,7 @@ class CoinbaseBalanceData(BalanceData):
     def get_hold(self) -> float | None:
         """Get hold/frozen balance.
 
-        Returns:
-            Hold balance amount or None if not initialized.
+        Returns: Hold balance amount or None if not initialized.
         """
         if not self.has_been_init_data:
             self.init_data()
@@ -219,8 +207,7 @@ class CoinbaseBalanceData(BalanceData):
     def get_total(self) -> float | None:
         """Get total balance.
 
-        Returns:
-            Total balance amount or None if not initialized.
+        Returns: Total balance amount or None if not initialized.
         """
         if not self.has_been_init_data:
             self.init_data()
@@ -229,8 +216,7 @@ class CoinbaseBalanceData(BalanceData):
     def get_native_balance(self) -> dict[str, Any] | None:
         """Get native balance information.
 
-        Returns:
-            Native balance dictionary or None if not initialized.
+        Returns: Native balance dictionary or None if not initialized.
         """
         if not self.has_been_init_data:
             self.init_data()
@@ -246,8 +232,7 @@ class CoinbaseWssBalanceData(CoinbaseBalanceData):
     def init_data(self) -> CoinbaseWssBalanceData:
         """Initialize balance data from WebSocket response.
 
-        Returns:
-            Self for method chaining.
+        Returns: Self for method chaining.
         """
         if self.has_been_init_data:
             return self
@@ -280,8 +265,7 @@ class CoinbaseRequestBalanceData(CoinbaseBalanceData):
     def init_data(self) -> CoinbaseRequestBalanceData:
         """Initialize balance data from REST API response.
 
-        Returns:
-            Self for method chaining.
+        Returns: Self for method chaining.
         """
         if self.has_been_init_data:
             return self

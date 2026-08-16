@@ -1,10 +1,13 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from bt_api_coinbase.containers.trades.coinbase_trade import CoinbaseTradeData
 
 
 class TestCoinbaseTradeData:
+    """Class TestCoinbaseTradeData"""
     def test_init(self):
+        """test_init method"""
         trade = CoinbaseTradeData({}, symbol_name="BTC-USD", asset_type="SPOT")
 
         assert trade.exchange_name == "COINBASE"
@@ -13,6 +16,7 @@ class TestCoinbaseTradeData:
         assert trade.has_been_init_data is False
 
     def test_init_data(self):
+        """test_init_data method"""
         data = {
             "entry_id": "123456",
             "order_id": "abc123",
@@ -32,6 +36,7 @@ class TestCoinbaseTradeData:
         assert trade.price == 50000.0
 
     def test_get_all_data(self):
+        """test_get_all_data method"""
         trade = CoinbaseTradeData(
             {}, symbol_name="BTC-USD", asset_type="SPOT", has_been_json_encoded=True
         )
@@ -41,6 +46,7 @@ class TestCoinbaseTradeData:
         assert result["symbol_name"] == "BTC-USD"
 
     def test_str_representation(self):
+        """test_str_representation method"""
         trade = CoinbaseTradeData(
             {}, symbol_name="BTC-USD", asset_type="SPOT", has_been_json_encoded=True
         )

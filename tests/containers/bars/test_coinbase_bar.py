@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import pytest
@@ -6,7 +7,9 @@ from bt_api_coinbase.containers.bars import CoinbaseBarData, CoinbaseRequestBarD
 
 
 class TestCoinbaseBarData:
+    """Class TestCoinbaseBarData"""
     def test_init(self):
+        """test_init method"""
         bar = CoinbaseBarData({}, symbol_name="BTC-USD", asset_type="SPOT")
 
         assert bar.exchange_name == "COINBASE"
@@ -15,6 +18,7 @@ class TestCoinbaseBarData:
         assert bar.has_been_init_data is False
 
     def test_init_data_raises_not_implemented(self):
+        """test_init_data_raises_not_implemented method"""
         bar = CoinbaseBarData(
             {}, symbol_name="BTC-USD", asset_type="SPOT", has_been_json_encoded=True
         )
@@ -23,6 +27,7 @@ class TestCoinbaseBarData:
             bar.init_data()
 
     def test_get_all_data(self):
+        """test_get_all_data method"""
         bar = CoinbaseBarData(
             {}, symbol_name="BTC-USD", asset_type="SPOT", has_been_json_encoded=True
         )
@@ -32,7 +37,9 @@ class TestCoinbaseBarData:
 
 
 class TestCoinbaseRequestBarData:
+    """Class TestCoinbaseRequestBarData"""
     def test_parse_dict_payload(self):
+        """test_parse_dict_payload method"""
         bar = CoinbaseRequestBarData(
             {
                 "start": "1688671800",
@@ -57,6 +64,7 @@ class TestCoinbaseRequestBarData:
         assert bar.get_volume() == 1000.0
 
     def test_parse_list_payload(self):
+        """test_parse_list_payload method"""
         bar = CoinbaseRequestBarData(
             [1688671800, 50000, 50500, 49500, 50200, 1000],
             symbol_name="BTC-USD",
@@ -70,6 +78,7 @@ class TestCoinbaseRequestBarData:
         assert result["close"] == 50200.0
 
     def test_str_representation_contains_exchange(self):
+        """test_str_representation_contains_exchange method"""
         bar = CoinbaseRequestBarData(
             {
                 "start": "1688671800",

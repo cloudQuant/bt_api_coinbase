@@ -23,6 +23,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     """Coinbase Spot trading REST API implementation."""
 
     def __init__(self, data_queue: Any, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self.exchange_name = kwargs.get("exchange_name", "COINBASE___SPOT")
@@ -38,12 +39,10 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create get ticker parameters.
 
-        Args:
-            symbol: Trading pair symbol (e.g., "BTC-USD")
+        Args: symbol: Trading pair symbol (e.g., "BTC-USD")
             extra_data: Extra data
 
-        Returns:
-            Tuple of (path, params, extra_data)
+        Returns: Tuple of (path, params, extra_data)
         """
         request_type = "get_ticker"
         path = self._params.get_rest_path(request_type)
@@ -82,11 +81,9 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     def get_ticker(self, symbol: Any, extra_data: Any = None, **kwargs: Any) -> Any:
         """Get ticker data.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
 
-        Returns:
-            RequestData with ticker data
+        Returns: RequestData with ticker data
         """
         path, params, extra_data = self._get_ticker(symbol=symbol, extra_data=extra_data, **kwargs)
         data = self.request(path, params=params, extra_data=extra_data, is_sign=False)
@@ -112,13 +109,11 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create get order book parameters.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             limit: Number of price levels
             extra_data: Extra data
 
-        Returns:
-            Tuple of (path, params, extra_data)
+        Returns: Tuple of (path, params, extra_data)
         """
         request_type = "get_depth"
         path = self._params.get_rest_path(request_type)
@@ -155,12 +150,10 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     def get_depth(self, symbol: Any, count: Any = 50, extra_data: Any = None, **kwargs: Any) -> Any:
         """Get order book data.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             limit: Number of price levels
 
-        Returns:
-            RequestData with order book data
+        Returns: RequestData with order book data
         """
         limit = kwargs.pop("limit", count)
         path, params, extra_data = self._get_depth(
@@ -196,16 +189,14 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create get kline parameters.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             period: Kline period (ONE_MINUTE, FIVE_MINUTE, etc.)
             start_time: Start timestamp (seconds)
             end_time: End timestamp (seconds)
             limit: Not used by Coinbase
             extra_data: Extra data
 
-        Returns:
-            Tuple of (path, params, extra_data)
+        Returns: Tuple of (path, params, extra_data)
         """
         request_type = "get_kline"
         path = self._params.get_rest_path(request_type)
@@ -262,14 +253,12 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> Any:
         """Get kline / candle data.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             period: Kline period
             start_time: Start timestamp
             end_time: End timestamp
 
-        Returns:
-            RequestData with kline data
+        Returns: RequestData with kline data
         """
         path, params, extra_data = self._get_kline(
             symbol=symbol,
@@ -333,8 +322,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     def get_server_time(self, extra_data: Any = None, **kwargs: Any) -> Any:
         """Get server time.
 
-        Returns:
-            RequestData with server time
+        Returns: RequestData with server time
         """
         path, params, extra_data = self._get_server_time(extra_data=extra_data, **kwargs)
         data = self.request(path, params=params, extra_data=extra_data, is_sign=False)
@@ -376,8 +364,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     def get_exchange_info(self, extra_data: Any = None, **kwargs: Any) -> Any:
         """Get exchange trading rules and product info.
 
-        Returns:
-            RequestData with exchange info
+        Returns: RequestData with exchange info
         """
         path, params, extra_data = self._get_exchange_info(extra_data=extra_data, **kwargs)
         data = self.request(path, params=params, extra_data=extra_data, is_sign=False)
@@ -399,8 +386,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create order parameters.
 
-        Args:
-            symbol: Trading pair symbol (e.g., "BTC-USD")
+        Args: symbol: Trading pair symbol (e.g., "BTC-USD")
             vol: Order volume
             price: Order price (required for limit orders)
             order_type: Order type (buy-limit, sell-limit, buy-market, sell-market)
@@ -409,8 +395,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
             client_order_id: Client order ID
             extra_data: Extra data
 
-        Returns:
-            Tuple of (path, body, extra_data)
+        Returns: Tuple of (path, body, extra_data)
         """
         request_type = "make_order"
         path = self._params.get_rest_path(request_type)
@@ -486,8 +471,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> Any:
         """Place a new order.
 
-        Returns:
-            RequestData with order response
+        Returns: RequestData with order response
         """
         path, body, extra_data = self._make_order(
             symbol, vol, price, order_type, offset, post_only, client_order_id, extra_data, **kwargs
@@ -507,14 +491,12 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create cancel order parameters.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             order_id: Order ID to cancel
             client_order_id: Client order ID to cancel
             extra_data: Extra data
 
-        Returns:
-            Tuple of (path, body, extra_data)
+        Returns: Tuple of (path, body, extra_data)
         """
         request_type = "cancel_order"
         path = self._params.get_rest_path(request_type)
@@ -549,8 +531,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> Any:
         """Cancel an order.
 
-        Returns:
-            RequestData with cancel response
+        Returns: RequestData with cancel response
         """
         path, body, extra_data = self._cancel_order(
             symbol=symbol,
@@ -569,12 +550,10 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create query order parameters.
 
-        Args:
-            order_id: Order ID
+        Args: order_id: Order ID
             extra_data: Extra data
 
-        Returns:
-            Tuple of (path, params, extra_data)
+        Returns: Tuple of (path, params, extra_data)
         """
         request_type = "query_order"
         path = self._params.get_rest_path(request_type)
@@ -613,11 +592,9 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> Any:
         """Query order details.
 
-        Args:
-            order_id: Order ID
+        Args: order_id: Order ID
 
-        Returns:
-            RequestData with order details
+        Returns: RequestData with order details
         """
         path, params, extra_data = self._query_order(
             order_id=order_id or kwargs.get("order_id"),
@@ -634,12 +611,10 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create get open orders parameters.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             extra_data: Extra data
 
-        Returns:
-            Tuple of (path, params, extra_data)
+        Returns: Tuple of (path, params, extra_data)
         """
         request_type = "get_open_orders"
         path = self._params.get_rest_path(request_type)
@@ -678,8 +653,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     def get_open_orders(self, symbol: Any = None, extra_data: Any = None, **kwargs: Any) -> Any:
         """Get all open orders.
 
-        Returns:
-            RequestData with open orders
+        Returns: RequestData with open orders
         """
         path, params, extra_data = self._get_open_orders(
             symbol=symbol, extra_data=extra_data, **kwargs
@@ -694,8 +668,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     ) -> tuple[str, dict[str, Any], dict[str, Any]]:
         """Create get account parameters.
 
-        Returns:
-            Tuple of (path, params, extra_data)
+        Returns: Tuple of (path, params, extra_data)
         """
         request_type = "get_account"
         path = self._params.get_rest_path(request_type)
@@ -734,8 +707,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     def get_account(self, symbol: Any = None, extra_data: Any = None, **kwargs: Any) -> Any:
         """Get account information.
 
-        Returns:
-            RequestData with account data
+        Returns: RequestData with account data
         """
         path, params, extra_data = self._get_account(extra_data=extra_data, **kwargs)
         data = self.request(path, params=params, extra_data=extra_data, is_sign=True)
@@ -744,8 +716,7 @@ class CoinbaseRequestDataSpot(CoinbaseRequestData):
     def get_balance(self, symbol: Any = None, extra_data: Any = None, **kwargs: Any) -> Any:
         """Get balance data — delegates to get_account.
 
-        Returns:
-            RequestData with balance data
+        Returns: RequestData with balance data
         """
         return self.get_account(extra_data=extra_data, **kwargs)
 
@@ -766,6 +737,7 @@ class CoinbaseMarketWssData:
     """Placeholder for Coinbase WebSocket market data implementation."""
 
     def __init__(self, data_queue: Any, **kwargs: Any) -> None:
+        """__init__ method"""
         self.data_queue = data_queue
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self._params = CoinbaseExchangeDataSpot()
@@ -775,6 +747,7 @@ class CoinbaseAccountWssData:
     """Placeholder for Coinbase WebSocket account data implementation."""
 
     def __init__(self, data_queue: Any, **kwargs: Any) -> None:
+        """__init__ method"""
         self.data_queue = data_queue
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self._params = CoinbaseExchangeDataSpot()
