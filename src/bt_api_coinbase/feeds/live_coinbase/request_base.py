@@ -13,11 +13,12 @@ import time
 from typing import Any
 from urllib import parse
 
-from bt_api_coinbase.containers.exchanges.coinbase_exchange_data import CoinbaseExchangeDataSpot
 from bt_api_base.containers.requestdatas.request_data import RequestData
 from bt_api_base.exceptions import QueueNotInitializedError
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
+
+from bt_api_coinbase.containers.exchanges.coinbase_exchange_data import CoinbaseExchangeDataSpot
 
 
 class CoinbaseRequestData(Feed):
