@@ -29,7 +29,7 @@ class CoinbaseOrderBookData(OrderBookData):
         """Coinbase.
 
         Args: order_book_info: （JSON）
-            symbol_name: 
+            symbol_name:
             asset_type: （ "SPOT"）
             has_been_json_encoded: JSON
         """

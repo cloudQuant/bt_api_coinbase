@@ -1,5 +1,5 @@
 """
-Coinbase 
+Coinbase
  Coinbase Spot  feed 、 ExchangeRegistry
 
 """
@@ -25,5 +25,5 @@ def register_coinbase() -> None:
     ExchangeRegistry.register_balance_handler("COINBASE___SPOT", _coinbase_balance_handler)
 
 
-# 
+#
 register_coinbase()
