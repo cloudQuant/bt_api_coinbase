@@ -1,4 +1,4 @@
-# bt_api_coinbase
+﻿# bt_api_coinbase
 
 [![PyPI Version](https://img.shields.io/pypi/v/bt_api_coinbase.svg)](https://pypi.org/project/bt_api_coinbase/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/bt_api_coinbase.svg)](https://pypi.org/project/bt_api_coinbase/)
