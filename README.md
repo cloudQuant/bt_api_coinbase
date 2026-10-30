@@ -35,14 +35,18 @@
 |---|---|---|---|---|
 | Spot | `COINBASE___SPOT` | ✅ | — | Spot trading via Advanced Trade API |
 
-### Dual API Modes
+### Current API Transport
 
-- **REST API** — Synchronous polling for order management, balance queries, historical data
-- **WebSocket API** — Real-time streaming (placeholder for future implementation)
+- **REST API** — Request feeds for market data and account/order operations.
+- **WebSocket streams** — Not implemented; the package's WebSocket classes are placeholders and are not registered as streams.
+
+### Provider and framework boundary
+
+This package implements Coinbase Advanced Trade REST request feeds, product mapping, and typed response containers. Its `bt_api.plugins` entry point is loaded by `bt_api_base.PluginLoader`; `register_plugin(registry)` registers the `COINBASE___SPOT` feed, exchange data, and balance handler. Importing the package alone does not register it. `bt_api_py` provides the `BtApi` facade, while Backtrader supplies the strategy and engine layer. This code wiring is not live-account acceptance. See [Trading System Architecture](https://github.com/cloudQuant/backtrader/blob/dev/docs/TRADING_SYSTEM_ARCHITECTURE.md).
 
 ### Plugin Architecture
 
-Auto-registers at import time via `ExchangeRegistry`. Works seamlessly with `BtApi`:
+The following `BtApi` example uses the registered REST feed:
 
 ```python
 from bt_api_py import BtApi
@@ -308,14 +312,18 @@ MIT — see [LICENSE](LICENSE).
 |---|---|---|---|---|
 | 现货 | `COINBASE___SPOT` | ✅ | — | 通过 Advanced Trade API 进行现货交易 |
 
-### 双 API 模式
+### 当前 API 传输方式
 
-- **REST API** — 同步轮询：订单管理、余额查询、历史数据
-- **WebSocket API** — 实时流（为未来实现预留）
+- **REST API** — 通过请求 feed 获取行情、账户和订单数据。
+- **WebSocket stream** — 尚未实现；包内 WebSocket 类为占位实现，插件不会注册为 stream。
+
+### Provider 与框架职责边界
+
+本包实现 Coinbase Advanced Trade REST 请求 feed、产品映射及类型化响应容器。安装包的 `bt_api.plugins` 入口由 `bt_api_base.PluginLoader` 加载；`register_plugin(registry)` 注册 `COINBASE___SPOT` feed、交易所数据和余额处理器。单独导入不会注册。`bt_api_py` 提供 `BtApi` 外观，Backtrader 提供策略与引擎层。源码接线不代表已通过真实账户验收。参见[交易系统架构](https://github.com/cloudQuant/backtrader/blob/dev/docs/TRADING_SYSTEM_ARCHITECTURE.md)。
 
 ### 插件架构
 
-通过 `ExchangeRegistry` 在导入时自动注册，与 `BtApi` 无缝协作：
+以下 `BtApi` 示例使用已注册的 REST feed：
 
 ```python
 from bt_api_py import BtApi
