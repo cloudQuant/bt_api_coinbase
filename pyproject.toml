@@ -62,6 +62,9 @@ Changelog = "https://github.com/cloudQuant/bt_api_coinbase/releases"
 [project.entry-points."bt_api.order_identity_projections"]
 COINBASE___SPOT = "bt_api_base.order_identity_projection:project_legacy_order_identity"
 
+[project.entry-points."bt_api.order_request_projections"]
+COINBASE___SPOT = "bt_api_base.order_request_projection:legacy_order_request_projection"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
