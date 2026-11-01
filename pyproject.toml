@@ -59,6 +59,9 @@ Changelog = "https://github.com/cloudQuant/bt_api_coinbase/releases"
 "CI" = "https://github.com/cloudQuant/bt_api_coinbase/actions"
 "PyPI" = "https://pypi.org/project/bt_api_coinbase/"
 
+[project.entry-points."bt_api.order_identity_projections"]
+COINBASE___SPOT = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
