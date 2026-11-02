@@ -97,4 +97,13 @@ COINBASE___SPOT = "bt_api_base.fee_projection:legacy_fee_projection"
 COINBASE___SPOT = "bt_api_base.order_side_projection:legacy_order_side_candidates"
 
 [project.entry-points."bt_api.normalization_policies"]
-COINBASE___SPOT = "bt_api_base.normalization_policy:legacy_normalization_policy"
+COINBASE___SPOT = "bt_api_coinbase.normalization_policy:normalization_policy"
+
+[project.entry-points."bt_api.execution_configuration_policies"]
+COINBASE___SPOT = "bt_api_base.execution_configuration_policy:legacy_execution_configuration_policy"
+
+[project.entry-points."bt_api.execution_ledger_identity_policies"]
+COINBASE = "bt_api_base.execution_ledger_identity_policy:legacy_ledger_policy"
+
+[project.entry-points."bt_api.account_risk_source_policies"]
+COINBASE = "bt_api_base.account_risk_source_policy:legacy_account_risk_source_policy"
